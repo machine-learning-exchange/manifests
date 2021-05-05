@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: dlf
+resources:
+  - ../../../../dlf/base
+configMapGenerator:
+- name: dlf-parameters
+  behavior: merge
+  envs:
+  - params.env
+generatorOptions:
+  disableNameSuffixHash: true

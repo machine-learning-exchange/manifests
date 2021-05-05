@@ -14,6 +14,10 @@ data:
         {
           "link": "/katib/",
           "text": "Katib"
+        },
+        {
+          "link": "/metadata/",
+          "text": "Artifact Store"
         }
       ],
       "externalLinks": [],
@@ -37,6 +41,11 @@ data:
           "text": "View Katib Experiments",
           "desc": "Katib",
           "link": "/katib/"
+        },
+        {
+          "text": "View Metadata Artifacts",
+          "desc": "Artifact Store",
+          "link": "/metadata/"
         }
       ],
       "documentationItems": [

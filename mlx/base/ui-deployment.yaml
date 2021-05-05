@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mlx-ui
+  namespace: kubeflow
+  labels:
+    service: mlx-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: mlx-ui
+  template:
+    metadata:
+      name: mlx-ui
+      labels:
+        service: mlx-ui
+    spec:
+      serviceAccountName: mlx-ui
+      containers:
+      - name: mlx-ui
+        # You can use your own webapp image below
+        image: aipipeline/mlx-ui:latest
+        imagePullPolicy: Always
+        env:
+        - name: REACT_APP_BRAND
+          value: Machine Learning Exchange
+        - name: REACT_APP_RUN
+          value: "true"
+        - name: REACT_APP_UPLOAD
+          value: "true"
+        - name: REACT_APP_BASE_PATH
+          value: /os
+        ports:
+        - containerPort: 3000

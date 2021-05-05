@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mlx-ui
+  namespace: kubeflow
+  labels:
+    service: mlx-ui
+  annotations:
+    getambassador.io/config: |-
+      ---
+      apiVersion: ambassador/v0
+      kind:  Mapping
+      name: mlx-ui
+      prefix: /aiops
+      rewrite: /aiops
+      timeout_ms: 300000
+      service: mlx-ui.kubeflow
+      use_websocket: true
+      ---
+      apiVersion: ambassador/v0
+      kind:  Mapping
+      name: mlx-ui-static
+      prefix: /static
+      rewrite: /static
+      timeout_ms: 300000
+      service: mlx-ui.kubeflow
+      use_websocket: true
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 3000
+  type: NodePort
+  selector:
+    service: mlx-ui

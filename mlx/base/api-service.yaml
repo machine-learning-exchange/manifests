@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mlx-api
+  namespace: kubeflow
+  labels:
+    service: mlx-api
+    environment: dev
+  annotations:
+    getambassador.io/config: |-
+      ---
+      apiVersion: ambassador/v0
+      kind:  Mapping
+      name: mlx-api
+      prefix: /apis
+      rewrite: /apis
+      timeout_ms: 300000
+      service: mlx-api.kubeflow
+      use_websocket: true
+spec:
+  type: NodePort
+  ports:
+  - name: mlx-api
+    port: 80
+    targetPort: 8080
+  selector:
+    service: mlx-api

@@ -54,49 +54,14 @@ workflows:
       - xgboost-job/*
     kwargs:
       build_and_apply: false
-      config_path: https://raw.githubusercontent.com/kubeflow/manifests/v1.2-branch/kfdef/kfctl_istio_dex.v1.2.0.yaml
+      config_path: https://raw.githubusercontent.com/kubeflow/manifests/master/kfdef/kfctl_istio_dex.yaml
 
   ####################################### AWS Specific Tests
   - py_func: kubeflow.kfctl.testing.ci.kfctl_e2e_workflow.create_workflow
-    name: aws-default
+    name: aws-e2e
     job_types:
       - periodic
     kwargs:
       build_and_apply: false
-      config_path: https://raw.githubusercontent.com/kubeflow/manifests/v1.2-branch/kfdef/kfctl_aws.v1.2.0.yaml
-      
-  - py_func: kubeflow.kfctl.testing.ci.kfctl_e2e_workflow.create_workflow
-    name: aws-1-15
-    job_types:
-      - periodic
-    kwargs:
-      build_and_apply: false
-      config_path: https://raw.githubusercontent.com/kubeflow/manifests/v1.2-branch/kfdef/kfctl_aws.v1.2.0.yaml
-      eks_cluster_version: "1.15"
+      config_path: https://raw.githubusercontent.com/kubeflow/manifests/master/kfdef/kfctl_aws.yaml
     
-  - py_func: kubeflow.kfctl.testing.ci.kfctl_e2e_workflow.create_workflow
-    name: aws-1-16
-    job_types:
-      - periodic
-    kwargs:
-      build_and_apply: false
-      config_path: https://raw.githubusercontent.com/kubeflow/manifests/v1.2-branch/kfdef/kfctl_aws.v1.2.0.yaml
-      eks_cluster_version: "1.16"  
-
-  - py_func: kubeflow.kfctl.testing.ci.kfctl_e2e_workflow.create_workflow
-    name: aws-1-17
-    job_types:
-      - periodic
-    kwargs:
-      build_and_apply: false
-      config_path: https://raw.githubusercontent.com/kubeflow/manifests/v1.2-branch/kfdef/kfctl_aws.v1.2.0.yaml
-      eks_cluster_version: "1.17"
-  
-  - py_func: kubeflow.kfctl.testing.ci.kfctl_e2e_workflow.create_workflow
-    name: aws-1-18
-    job_types:
-      - periodic
-    kwargs:
-      build_and_apply: false
-      config_path: https://raw.githubusercontent.com/kubeflow/manifests/v1.2-branch/kfdef/kfctl_aws.v1.2.0.yaml
-      eks_cluster_version: "1.18"

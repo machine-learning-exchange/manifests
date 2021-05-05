@@ -34,23 +34,13 @@ spec:
   - kustomizeConfig:
       repoRef:
         name: manifests
-        path: stacks/azure/application/add-anonymous-user-filter-istio-1-6
+        path: stacks/azure/application/add-anonymous-user-filter-istio-1.6
     name: add-anonymous-user-filter
   - kustomizeConfig:
       repoRef:
         name: manifests
         path: stacks/azure/application/cert-manager
     name: cert-manager
-  - kustomizeConfig:
-      repoRef:
-        name: manifests
-        path: knative/installs/generic
-    name: knative
-  - kustomizeConfig:
-      repoRef:
-        name: manifests
-        path: kfserving/installs/generic
-    name: kfserving
   - kustomizeConfig:
       repoRef:
         name: manifests
@@ -63,5 +53,6 @@ spec:
     name: kubeflow-apps
   repos:
   - name: manifests
-    uri: https://github.com/kubeflow/manifests/archive/ebeb4c285a0cf49750c4f07015b58cc27ca4c3a1.tar.gz
+    uri: https://github.com/kubeflow/manifests/archive/v1.2-branch.tar.gz
   version: v1.2-branch
+

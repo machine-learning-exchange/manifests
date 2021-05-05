@@ -1,0 +1,5 @@
+varReference:
+- path: spec/template/spec/volumes[]/hostPath
+  kind: DaemonSet
+- path: spec/template/spec/volumes[]/hostPath
+  kind: StatefulSet

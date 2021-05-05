@@ -6,10 +6,10 @@ commonLabels:
 images:
 - name: gcr.io/kubeflow-images-public/kfam
   newName: gcr.io/kubeflow-images-public/kfam
-  newTag: vmaster-g9f3bfd00
+  newTag: vmaster-gf3e09203
 - name: gcr.io/kubeflow-images-public/profile-controller
   newName: gcr.io/kubeflow-images-public/profile-controller
-  newTag: vmaster-ga49f658f
+  newTag: vmaster-g34aa47c2
 resources:
 - ../base/cluster-role-binding.yaml
 - ../base/crd.yaml

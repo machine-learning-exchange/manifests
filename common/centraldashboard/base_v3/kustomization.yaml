@@ -3,7 +3,7 @@ kind: Kustomization
 images:
 - name: gcr.io/kubeflow-images-public/centraldashboard
   newName: gcr.io/kubeflow-images-public/centraldashboard
-  newTag: vmaster-g8097cfeb
+  newTag: vmaster-gd601b2d0
 resources:
 - ../base/clusterrole-binding.yaml
 - ../base/clusterrole.yaml
@@ -12,6 +12,3 @@ resources:
 - ../base/role.yaml
 - ../base/service-account.yaml
 - ../base/service.yaml
-- ../base/links-configmap.yaml
-patchesStrategicMerge:
-- deployment_patch.yaml
