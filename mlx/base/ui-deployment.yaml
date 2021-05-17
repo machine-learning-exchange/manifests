@@ -31,5 +31,21 @@ spec:
           value: "true"
         - name: REACT_APP_BASE_PATH
           value: /os
+        - name: SESSION_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: dashboard-admin
+              key: sesstion
         ports:
         - containerPort: 3000
+        volumeMounts:
+        - mountPath: /workspace/models
+          name: dashboard-admin
+          readOnly: true
+      volumes:
+      - name: dashboard-admin
+        secret:
+          items:
+          - key: admin.json
+            path: admin.json
+          secretName: dashboard-admin

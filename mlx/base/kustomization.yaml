@@ -9,6 +9,7 @@ resources:
   - api-service.yaml
   - api-serviceaccount.yaml
   - ui-serviceaccount.yaml
+  - ui-secret.yaml
   - ui-deployment.yaml
   - ui-service.yaml
   - ui-virtualservice.yaml
