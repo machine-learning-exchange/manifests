@@ -4,5 +4,5 @@ metadata:
   name: kubeflow
   labels:
     control-plane: kubeflow
-    istio-injection: enabled
+    istio-injection: disabled
     katib-metricscollector-injection: enabled

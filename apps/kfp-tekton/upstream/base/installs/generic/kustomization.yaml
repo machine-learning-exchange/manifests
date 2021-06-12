@@ -9,6 +9,7 @@ bases:
 resources:
   - pipeline-install-config.yaml
   - mysql-secret.yaml
+  - virtual-service.yaml
 
 
 images:
