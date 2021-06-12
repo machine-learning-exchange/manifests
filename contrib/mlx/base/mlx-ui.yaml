@@ -51,7 +51,7 @@ spec:
       containers:
       - name: mlx-ui
         # You can use your own webapp image below
-        image: aipipeline/mlx-ui:latest
+        image: mlexchange/mlx-ui:nightly-origin-main
         imagePullPolicy: Always
         env:
         - name: REACT_APP_BRAND
