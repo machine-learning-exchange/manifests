@@ -11,25 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: mlx-ui
-  namespace: kubeflow
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: mlx-dashboard-admin
-  namespace: kubeflow
-type: Opaque
-stringData:
-  admin.json: |
-    {
-      "admin": { "password": "passw0rd", "email": "mlx@ibm.com", "roles": ["admin"] }
-    }
-  session: "machine learning exchange"
----
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -61,9 +43,9 @@ spec:
         - name: REACT_APP_UPLOAD
           value: "true"
         - name: REACT_APP_BASE_PATH
-          value: /mlx
+          value: ""
         - name: REACT_APP_DISABLE_LOGIN
-          value: "true"
+          value: "false"
         - name: KUBEFLOW_USERID_HEADER
           value: kubeflow-userid
         - name: SESSION_SECRET
@@ -87,22 +69,6 @@ spec:
           secretName: mlx-dashboard-admin
       serviceAccountName: mlx-ui
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: mlx-ui
-  namespace: kubeflow
-  labels:
-    service: mlx-ui
-spec:
-  ports:
-  - port: 80
-    protocol: TCP
-    targetPort: 3000
-  type: NodePort
-  selector:
-    service: mlx-ui
----
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
@@ -116,9 +82,9 @@ spec:
   http:
   - match:
     - uri:
-        prefix: /mlx
+        prefix: /
     rewrite:
-      uri: /mlx
+      uri: /
     route:
     - destination:
         host: mlx-ui.kubeflow.svc.cluster.local
