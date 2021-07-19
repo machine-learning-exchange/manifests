@@ -13,14 +13,31 @@
 # limitations under the License.apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 bases:
-  - ../base
+  - ../base/mlx-deployments
 resources:
-  - mlx-api-auth.yaml
-  - mlx-ui-auth.yaml
-  - mysql-auth.yaml
-  - ml-pipeline-api-auth.yaml
-  - mlx-ext-authz.yaml
-  - istio-configmap.yaml
-  - mlx-profile.yaml
+  - minio.yaml
+  - mysql.yaml
+  - namespace.yaml
+  - k8s-ingress.yaml
+  - init-jobs.yaml
+  - config.yaml
 patchesStrategicMerge:
   - mlx-api-patch.yaml
+  - mlx-ui-patch.yaml
+configMapGenerator:
+- name: mlx-parameters
+  literals:
+  # Update the credentials for the below fields before apply.
+  - ingress-domain=ml-exchange.org
+generatorOptions:
+  disableNameSuffixHash: true
+vars:
+- name: ingress-domain
+  objref:
+    kind: ConfigMap
+    name: mlx-parameters
+    apiVersion: v1
+  fieldref:
+    fieldpath: data.ingress-domain
+configurations:
+- params.yaml

@@ -11,16 +11,27 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-bases:
-  - ../base
-resources:
-  - mlx-api-auth.yaml
-  - mlx-ui-auth.yaml
-  - mysql-auth.yaml
-  - ml-pipeline-api-auth.yaml
-  - mlx-ext-authz.yaml
-  - istio-configmap.yaml
-  - mlx-profile.yaml
-patchesStrategicMerge:
-  - mlx-api-patch.yaml
+
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  labels:
+    app.kubernetes.io/component: oidc-authservice
+    app.kubernetes.io/name: oidc-authservice
+  name: authservice
+  namespace: istio-system
+spec:
+  gateways:
+  - kubeflow/kubeflow-gateway
+  hosts:
+  - '*'
+  http:
+  - match:
+    - uri:
+        # Dummy path to avoid mlx-ui login redirect path
+        prefix: /oidc/login
+    route:
+    - destination:
+        host: authservice.istio-system.svc.cluster.local
+        port:
+          number: 8080
